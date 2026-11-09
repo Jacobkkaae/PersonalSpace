@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 
 import { getApiHealth } from './api';
 import { getCurrentUser, login, logout } from './auth';
+import { RecipePage } from './recipes/RecipePage';
+import './recipes/RecipePage.css';
 
 type User = {
   id: string;
@@ -76,20 +78,14 @@ function App() {
   }
 
   return (
-    <main>
-      <h1>PersonalSpace</h1>
-      <p>Your personal space for recipes and more.</p>
-      <p>{apiStatus}</p>
+    user ? (
+      <RecipePage onLogout={handleLogout} />
+    ) : (
+      <main>
+        <h1>PersonalSpace</h1>
+        <p>Your personal space for recipes and more.</p>
+        <p>{apiStatus}</p>
 
-      {user ? (
-        <section>
-          <h2>Welcome</h2>
-          <p>Signed in as {user.email}</p>
-          <button type="button" onClick={handleLogout}>
-            Log out
-          </button>
-        </section>
-      ) : (
         <section>
           <h2>Log in</h2>
 
@@ -119,10 +115,10 @@ function App() {
             </button>
           </form>
         </section>
-      )}
 
-      {error && <p role="alert">{error}</p>}
-    </main>
+        {error && <p role="alert">{error}</p>}
+      </main>
+    )
   );
 }
 

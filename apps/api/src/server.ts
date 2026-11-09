@@ -1,10 +1,11 @@
 import cors from '@fastify/cors';
 import Fastify from 'fastify';
 import { authRoutes } from './auth/routes.js';
-
+import cookie from '@fastify/cookie';
 import { sql } from 'drizzle-orm';
-
+import { recipeRoutes } from './recipes/routes.js';
 import { database } from './database/client.js';
+import 'dotenv/config';
 
 const server = Fastify({
   logger: true,
@@ -12,11 +13,14 @@ const server = Fastify({
 
 server.decorateRequest('user', null);
 
+await server.register(cookie);
 await server.register(authRoutes);
+await server.register(recipeRoutes);
 
 await server.register(cors, {
-  origin: 'http://localhost:5173',
+  origin: process.env.WEB_ORIGIN ?? 'http://localhost:5173',
   credentials: true,
+  methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 });
 
 server.get('/health', async () => {
@@ -33,7 +37,7 @@ const port = Number(process.env.API_PORT ?? 3000);
 
 try {
   await server.listen({
-    host: '127.0.0.1',
+    host: process.env.API_HOST ?? '127.0.0.1',
     port,
   });
 } catch (error) {

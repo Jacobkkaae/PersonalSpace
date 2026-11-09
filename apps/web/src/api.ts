@@ -1,4 +1,4 @@
-const apiUrl = 'http://127.0.0.1:3000';
+const apiUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 export async function getApiHealth(): Promise<{ status: string }> {
   const response = await fetch(`${apiUrl}/health`);

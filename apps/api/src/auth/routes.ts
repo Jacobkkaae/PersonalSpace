@@ -1,5 +1,4 @@
 import type { FastifyPluginAsync } from 'fastify';
-import cookie from '@fastify/cookie';
 
 import {
   authenticateUser,
@@ -11,7 +10,6 @@ import {
 export const sessionCookieName = 'personal_space_session';
 
 export const authRoutes: FastifyPluginAsync = async (server) => {
-  await server.register(cookie);
 
   server.post<{
     Body: {
