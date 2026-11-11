@@ -39,7 +39,12 @@ type RecipeDraft = {
   instructions: DraftInstruction[];
 };
 
-const newId = () => crypto.randomUUID();
+let draftId = 0;
+
+const newId = () => {
+  draftId += 1;
+  return `draft-${draftId}`;
+};
 
 function emptyDraft(): RecipeDraft {
   return {
