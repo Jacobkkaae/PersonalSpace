@@ -1,0 +1,40 @@
+{
+  "name": "personal-space",
+  "version": "1.0.0",
+  "description": "PersonalSpace personal productivity application",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "dev:web": "npm run dev --workspace @personal-space/web",
+    "dev:api": "npm run dev --workspace @personal-space/api",
+    "typecheck": "tsc --noEmit -p apps/api/tsconfig.json",
+    "typecheck:api": "tsc --noEmit -p apps/api/tsconfig.json",
+    "typecheck:web": "npm run typecheck --workspace @personal-space/web"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jacobkkaae/PersonalSpace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jacobkkaae/PersonalSpace/issues"
+  },
+  "homepage": "https://github.com/Jacobkkaae/PersonalSpace#readme",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
