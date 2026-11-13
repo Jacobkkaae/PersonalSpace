@@ -38,7 +38,7 @@ export const authRoutes: FastifyPluginAsync = async (server) => {
     reply.setCookie(sessionCookieName, sessionToken, {
       httpOnly: true,
       sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.COOKIE_SECURE === 'true',
       path: '/',
       maxAge: 30 * 24 * 60 * 60,
     });
@@ -61,7 +61,7 @@ export const authRoutes: FastifyPluginAsync = async (server) => {
     reply.clearCookie(sessionCookieName, {
       httpOnly: true,
       sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.COOKIE_SECURE === 'true',
       path: '/',
     });
 
